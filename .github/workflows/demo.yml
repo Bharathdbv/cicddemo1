@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas numpy streamlit
+          pip install pandas numpy streamlit scikit-learn
 
       - name: Run Super-Linter
         uses: github/super-linter@v4
@@ -51,7 +51,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas numpy streamlit
+          pip install pandas numpy streamlit scikit-learn
 
       - name: Run Python script
         run: python script.py
