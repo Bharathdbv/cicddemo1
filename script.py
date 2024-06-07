@@ -14,15 +14,20 @@ st.write("It is important that credit card companies are able to recognize fraud
 input_str = st.text_input("Enter required features separated by comma (Time, V1, V2, ..., V28, Amount)")
 
 # Split the input string into a list of features
-input_features = input_str.split(',')
+if input_str:
+    input_features = input_str.split(',')
+    try:
+        # Convert features to numpy array
+        features = np.asarray(input_features, dtype=np.float64)
 
-# Convert features to numpy array
-features = np.asarray(input_features, dtype=np.float64)
-
-# Predict using the loaded model
-if st.button('Submit'):
-    prediction = lr.predict(features.reshape(1, -1))
-    if prediction[0] == 0:
-        st.write("Legitimate Transaction")
-    else:
-        st.write("Fraud Transaction")
+        # Predict using the loaded model
+        if st.button('Submit'):
+            prediction = lr.predict(features.reshape(1, -1))
+            if prediction[0] == 0:
+                st.write("Legitimate Transaction")
+            else:
+                st.write("Fraud Transaction")
+    except ValueError:
+        st.write("Please enter valid numeric values for all features.")
+else:
+    st.write("Please enter the required features.")
